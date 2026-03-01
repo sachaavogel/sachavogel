@@ -14,11 +14,154 @@
     <h1>Sacha Vogel</h1>
     <h2>Hi, I'm Sacha!</h2>
     <p>Support the Sacha Watercolor Fund (SWF). Help me get the art supplies I need to continue on my watercolor journey! To donate or ask questions, <a href="mailto:sacha@sachavogel.com">email me!</a></p>
-    <svg id="fundraising-thermometer-150" width="200" height="212"></svg>
-    <script>
-      var fundraising_thermometer_150 = {"layout":"1","fill-color":"rgba(226, 37, 15, 1)","goal-amount":"25","progress-amount":"10","show-goal-amount":"1","show-progress-percentage":"1","show-progress-amount":"1","animate-progress-fill":"1"};
-    </script>
-    <script for="fundraising-thermometer-150" type="text/javascript" src="https://d22knjn4n6hjqd.cloudfront.net/thermometer/embed.js"></script>
+<!-- ============================================================
+     ✏️  EDIT YOUR FUNDRAISER DATA HERE
+     ============================================================ -->
+<script>
+  const FUNDRAISER = {
+    goal:     25,
+    raised:   10,
+    currency: "$"
+  };
+</script>
+<!-- ============================================================ -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@700&display=swap');
+
+  .thermo-goal-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 0.08em;
+    color: #111;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .thermo-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 220px;
+  }
+
+  svg#thermo {
+    width: 80px;
+    overflow: visible;
+  }
+
+  #gray-cover {
+    transition: height 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .thermo-pointer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease 1.8s;
+  }
+  .thermo-pointer.left  { right: calc(50% + 42px); }
+  .thermo-pointer.right { left:  calc(50% + 42px); }
+  .thermo-pointer.visible { opacity: 1; }
+
+  .thermo-pointer-badge {
+    background: #111;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  .thermo-arrow-left  { width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:9px solid #111; }
+  .thermo-arrow-right { width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:9px solid #111; }
+</style>
+
+<div class="thermo-goal-label" id="goal-label"></div>
+
+<div class="thermo-wrap" id="thermo-wrap">
+  <svg id="thermo" viewBox="0 0 80 440" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="thermo-clip">
+        <path d="M 20,358 L 20,20 A 20,20 0 0,1 60,20 L 60,358 A 42,42 0 1,1 20,358 Z"/>
+      </clipPath>
+    </defs>
+
+    <path d="M 20,358 L 20,20 A 20,20 0 0,1 60,20 L 60,358 A 42,42 0 1,1 20,358 Z"
+          fill="#cc2200"/>
+
+    <rect id="gray-cover"
+          x="0" y="0" width="80" height="440"
+          fill="#e8e8e8"
+          clip-path="url(#thermo-clip)"/>
+
+    <path d="M 20,358 L 20,20 A 20,20 0 0,1 60,20 L 60,358 A 42,42 0 1,1 20,358 Z"
+          fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+
+    <g id="ticks" stroke="#111" stroke-width="1.5" stroke-linecap="round"></g>
+
+    <circle cx="27" cy="386" r="8" fill="rgba(255,255,255,0.25)"/>
+  </svg>
+
+  <div class="thermo-pointer left" id="ptr-left">
+    <div class="thermo-pointer-badge" id="ptr-pct"></div>
+    <div class="thermo-arrow-left"></div>
+  </div>
+  <div class="thermo-pointer right" id="ptr-right">
+    <div class="thermo-arrow-right"></div>
+    <div class="thermo-pointer-badge" id="ptr-amt"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const { goal, raised, currency } = FUNDRAISER;
+  const pct = Math.min(1, Math.max(0, raised / goal));
+
+  document.getElementById('goal-label').textContent = 'GOAL: ' + currency + goal;
+  document.getElementById('ptr-pct').textContent = Math.round(pct * 100) + '%';
+  document.getElementById('ptr-amt').textContent = currency + raised;
+
+  const TICK_TOP    = 28;
+  const TICK_BOTTOM = 348;
+  const ticksEl = document.getElementById('ticks');
+  for (let i = 1; i < 20; i++) {
+    const y       = TICK_BOTTOM - (i / 20) * (TICK_BOTTOM - TICK_TOP);
+    const isMajor = (i % 5 === 0);
+    const ln      = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    ln.setAttribute('x1', 60 - (isMajor ? 14 : 8));
+    ln.setAttribute('x2', 58);
+    ln.setAttribute('y1', y);
+    ln.setAttribute('y2', y);
+    ticksEl.appendChild(ln);
+  }
+
+  const FILL_BOTTOM = 358;
+  const FILL_TOP    = 20;
+  const targetY     = FILL_BOTTOM - pct * (FILL_BOTTOM - FILL_TOP);
+
+  setTimeout(function () {
+    document.getElementById('gray-cover').setAttribute('height', targetY);
+
+    const svg      = document.getElementById('thermo');
+    const wrap     = document.getElementById('thermo-wrap');
+    const svgRect  = svg.getBoundingClientRect();
+    const wrapRect = wrap.getBoundingClientRect();
+    const scale    = svgRect.height / 440;
+    const pxTop    = (svgRect.top - wrapRect.top) + targetY * scale - 11;
+
+    ['ptr-left', 'ptr-right'].forEach(function (id) {
+      const el = document.getElementById(id);
+      el.style.top = pxTop + 'px';
+      el.classList.add('visible');
+    });
+  }, 250);
+})();
+</script>
     <br/>
     <p><strong>Join our 50/50 raffle benefitting the SWF! <a href="mailto:sacha@sachavogel.com">Contact us!</a></strong></p>
     
