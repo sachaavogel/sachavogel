@@ -1,3 +1,18 @@
 .warning {
   color: red;
 }
+
+.lsoh {
+  color: #67a12d;
+  font-family: "Creepster", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lsoh-p {
+  background-color:black;
+  color: white;
+  font-family: "Kings", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
