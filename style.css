@@ -5,10 +5,9 @@
 }
 
 .lsoh {
-  color: black;
-  font-family: "Nosifer", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'Nosifer', sans-serif;
+  font-size: 3rem;
+  color: #ff0000;
 }
 
 .lsoh-p {
