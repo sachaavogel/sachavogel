@@ -36,75 +36,7 @@
     setTimeout(() => div.remove(), 10000);
   }, 6000);
 </script>
-<style>
-  .plant-trigger > * {
-    pointer-events: none;
-  }
-
-  #plant {
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-  }
-
-  #plant img {
-    width: 100%;
-  }
-
-  #plant:after {
-    content: '';
-    background-image: url('https://littleshopnyc.com/_img/audrey-chomp.gif');
-    background-size: cover;
-    background-position: center center;
-    position: absolute;
-    height: 106%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-47%,-72%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  #plant.chomp:after,
-  #plant:hover:after {
-    opacity: 1;
-  }
-
-  #plant > :last-child {
-    position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    height: auto;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  #plant.chomp > :first-child,
-  #plant:hover > :first-child {
-    opacity: 0;
-  }
-
-  #plant.chomp > :last-child,
-  #plant:hover > :last-child {
-    opacity: 1;
-  }
-</style>
-<div id="plant" class="img-states">
-  <picture>
-    <source type="image/webp" srcset="https://littleshopnyc.com/_img/audrey.webp">
-    <source type="image/png" srcset="https://littleshopnyc.com/_img/audrey.png">
-    <img alt="LITTLE SHOP OF HORROROS" src="https://littleshopnyc.com/_img/audrey.png" height="500" width="500" loading="lazy">
-  </picture>
-  <picture>
-    <source type="image/webp" srcset="https://littleshopnyc.com/_img/audrey-sans-tete.webp">
-    <source type="image/png" srcset="https://littleshopnyc.com/_img/audrey-sans-tete.png">
-    <img alt="LITTLE SHOP OF HORROROS" src="https://littleshopnyc.com/_img/audrey-sans-tete.png" height="500" width="500" loading="lazy">
-  </picture>
+    <img src="https://littleshopnyc.com/_img/audrey-chomp.gif></img>
   <p>Credit: Little Shop NYC</p>
 </div>
 <!--end lsoh day -->
