@@ -1,9 +1,34 @@
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
 User-agent: *
 Disallow:
 
 ##NOTE##
-#Hey, this is Sacha! I like programming, probably just like you! I don't really care what you do here, just be nice!#
-#Just be ethical; nothing for profit, but whatever for fun (or for programming practice)! Enjoy your scraping!#
+# Hey, this is Sacha! I like programming, probably just like you! Some new updates on this file... #
+# No AI bots are permitted to scrape this website, no exceptions. There is bot control here to prevent AI bots from scraping. #
+# Otherwise, if you are a human, just be ethical; nothing for profit, but whatever for fun (or for programming practice)! Enjoy this website! #
 
 #                  .----.
 #      .---------. | == |
